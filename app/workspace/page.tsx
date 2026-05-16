@@ -364,8 +364,10 @@ Your intelligent AI-powered productivity workspace          </p>
       >
         <div className="flex items-start justify-between gap-2">
   <h3 className="font-semibold">
-    {note.title}
-  </h3>
+  {note.id === activeNoteId
+    ? title || "Untitled Note"
+    : note.title}
+</h3>
 
   <button
     onClick={(e) => {
@@ -380,9 +382,14 @@ Your intelligent AI-powered productivity workspace          </p>
 </div>
 
         <p className="mt-1 line-clamp-2 text-sm opacity-70">
-{note.content?.trim()
-  ? note.content
-  : "No content yet"}        </p>
+  {note.id === activeNoteId
+    ? content?.trim()
+      ? content
+      : "No content yet"
+    : note.content?.trim()
+    ? note.content
+    : "No content yet"}
+</p>
       </button>
           ))
   ) : (
