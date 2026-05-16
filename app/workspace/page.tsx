@@ -131,25 +131,26 @@ const [activeNoteId, setActiveNoteId] = useState("")
 const createNewNote = () => {
   const newNote = {
     id: Date.now().toString(),
-    title: "Untitled Note",
+    title: "",
     content: "",
   }
-  
 
   const updatedNotes = [newNote, ...notes]
 
   setNotes(updatedNotes)
   setActiveNoteId(newNote.id)
 
-  setTitle(newNote.title)
-  setContent(newNote.content)
+  setTitle("")
+  setContent("")
   setSummary("")
-setActionItems([])
+  setActionItems([])
 
   localStorage.setItem(
     "peblo-notes",
     JSON.stringify(updatedNotes)
   )
+
+  toast.success("New note created")
 }
 const deleteNote = (id: string) => {
   const updatedNotes = notes.filter(
@@ -279,11 +280,13 @@ Your intelligent AI-powered productivity workspace          </p>
     </h2>
 
     <button
-      onClick={createNewNote}
-      className="rounded-xl bg-black px-3 py-2 text-sm text-white dark:bg-white dark:text-black"
-    >
-      New
-    </button>
+  onClick={() => {
+    createNewNote()
+  }}
+  className="rounded-xl bg-black px-3 py-2 text-sm text-white dark:bg-white dark:text-black"
+>
+  New
+</button>
   </div>
 <input
   type="text"
