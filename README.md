@@ -1,38 +1,29 @@
 # Peblo AI Workspace
 
-An AI-powered productivity and note-taking workspace built with Next.js, TypeScript, Tailwind CSS, and Groq AI.
+An AI-powered productivity workspace built with Next.js and Tailwind CSS.
 
 ## Features
 
-* AI-generated summaries
-* AI action item extraction
-* AI title suggestions
-* Multi-note management
-* Search notes
-* Auto-save with localStorage
-* Modern responsive UI
-* Dark mode support
-* Live deployment on Vercel
+- AI Note Summaries
+- Action Item Extraction
+- Smart Title Suggestions
+- Multi-note Workspace
+- Dark / Light Mode
+- Auto Save
+- Responsive UI
 
 ## Tech Stack
 
-* Next.js
-* TypeScript
-* Tailwind CSS
-* Groq API
-* Vercel
+- Next.js
+- TypeScript
+- Tailwind CSS
+- Groq API
+- Vercel
 
 ## Live Demo
 
-Paste your Vercel link here
+https://ai-notes-workspace-five.vercel.app
 
-## Installation
+## GitHub Repository
 
-```bash
-npm install
-npm run dev
-```
-
-## Author
-
-Jyoti Rana
+https://github.com/YOUR-USERNAME/YOUR-REPO
