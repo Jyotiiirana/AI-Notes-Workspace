@@ -1,3 +1,4 @@
+"use client"
 import {
   Brain,
   FileText,
@@ -8,6 +9,7 @@ import {
 } from "lucide-react"
 
 import ThemeToggle from "@/components/theme-toggle"
+import Link from "next/link"
 
 export default function Home() {
   return (
@@ -95,14 +97,12 @@ export default function Home() {
               </p>
 
               <div className="mt-6 flex gap-4">
-                <button
-  onClick={() => {
-    window.location.href = "/workspace"
-  }}
-  className="rounded-2xl bg-black px-6 py-4 text-white"
+                <Link
+  href="/workspace"
+  className="rounded-2xl bg-black px-6 py-4 text-white inline-block"
 >
   Create Note
-</button>
+</Link>
 
                 <button className="rounded-2xl border px-6 py-3 transition hover:bg-black/5 dark:hover:bg-white/10">
                   Explore AI
