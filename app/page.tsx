@@ -95,9 +95,14 @@ export default function Home() {
               </p>
 
               <div className="mt-6 flex gap-4">
-                <button className="rounded-2xl bg-black px-6 py-3 text-white transition hover:scale-105 dark:bg-white dark:text-black">
-                  Create Note
-                </button>
+                <button
+  onClick={() => {
+    window.location.href = "/workspace"
+  }}
+  className="rounded-2xl bg-black px-6 py-4 text-white"
+>
+  Create Note
+</button>
 
                 <button className="rounded-2xl border px-6 py-3 transition hover:bg-black/5 dark:hover:bg-white/10">
                   Explore AI
