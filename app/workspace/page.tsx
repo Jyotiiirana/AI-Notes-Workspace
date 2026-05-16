@@ -5,6 +5,7 @@ import {
   Tag,
   WandSparkles,
 } from "lucide-react"
+import ThemeToggle from "@/components/theme-toggle"
 import { useEffect, useState } from "react"
 import { toast } from "sonner"
 
@@ -129,14 +130,50 @@ ${content}`,
   const [searchQuery, setSearchQuery] = useState("")
 const [activeNoteId, setActiveNoteId] = useState("")
 const createNewNote = () => {
+  // SAVE CURRENT NOTE FIRST
+  if (activeNoteId) {
+    const updatedExistingNotes = notes.map((note) =>
+      note.id === activeNoteId
+        ? {
+            ...note,
+            title: title || "Untitled Note",
+            content,
+          }
+        : note
+    )
+
+    setNotes(updatedExistingNotes)
+
+    localStorage.setItem(
+      "peblo-notes",
+      JSON.stringify(updatedExistingNotes)
+    )
+  }
+
+  // CREATE NEW NOTE
   const newNote = {
     id: Date.now().toString(),
-    title: "",
+    title: "Untitled Note",
     content: "",
   }
 
-  const updatedNotes = [newNote, ...notes]
-
+const updatedNotes = [
+  newNote,
+  ...(activeNoteId
+    ? notes.map((note) =>
+        note.id === activeNoteId
+          ? {
+              ...note,
+              title:
+                title || "Untitled Note",
+              content,
+               summary,
+    actionItems,
+            }
+          : note
+      )
+    : notes),
+]
   setNotes(updatedNotes)
   setActiveNoteId(newNote.id)
 
@@ -263,10 +300,17 @@ if (savedNotes) {
 Your intelligent AI-powered productivity workspace          </p>
         </div>
 
-        <div className="flex items-center gap-3 rounded-2xl border border-green-500/20 bg-green-500/10 px-4 py-2 text-sm text-green-600">
-          <Save size={16} />
-          {lastSaved ? `Saved at ${lastSaved}` : "Auto-save enabled"}
-        </div>
+        <div className="flex items-center gap-4">
+  
+  <ThemeToggle />
+
+  <div className="flex items-center gap-3 rounded-2xl border border-green-500/20 bg-green-500/10 px-4 py-2 text-sm text-green-600">
+    <Save size={16} />
+    {lastSaved
+      ? `Saved at ${lastSaved}`
+      : "Auto-save enabled"}
+  </div>
+</div>
       </div>
 
       {/* MAIN GRID */}
@@ -302,12 +346,16 @@ Your intelligent AI-powered productivity workspace          </p>
     filteredNotes.map((note) => (      <button
         key={note.id}
         onClick={() => {
-          setActiveNoteId(note.id)
-          setTitle(note.title)
-          setContent(note.content)
-          setSummary("")
-setActionItems([])
-        }}
+  setActiveNoteId(note.id)
+  setTitle(note.title)
+  setContent(note.content)
+
+  setSummary(note.summary || "")
+
+  setActionItems(
+    note.actionItems || []
+  )
+}}
         className={`w-full rounded-2xl border p-4 text-left transition ${
           activeNoteId === note.id
             ? "border-black bg-black text-white dark:border-white dark:bg-white dark:text-black"
@@ -332,8 +380,9 @@ setActionItems([])
 </div>
 
         <p className="mt-1 line-clamp-2 text-sm opacity-70">
-          {note.content || "Empty note"}
-        </p>
+{note.content?.trim()
+  ? note.content
+  : "No content yet"}        </p>
       </button>
           ))
   ) : (
