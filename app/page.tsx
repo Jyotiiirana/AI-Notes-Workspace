@@ -19,7 +19,7 @@ export default function Home() {
       <header className="flex items-center justify-between border-b border-black/5 px-8 py-5 dark:border-white/10">
         <div>
           <h1 className="text-3xl font-bold tracking-tight">
-            Peblo AI Workspace
+            NeuroNotes AI
           </h1>
 
           <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">

@@ -138,6 +138,8 @@ const createNewNote = () => {
             ...note,
             title: title || "Untitled Note",
             content,
+            summary,
+          actionItems,
           }
         : note
     )
@@ -145,7 +147,7 @@ const createNewNote = () => {
     setNotes(updatedExistingNotes)
 
     localStorage.setItem(
-      "peblo-notes",
+      "NeuroNotes",
       JSON.stringify(updatedExistingNotes)
     )
   }
@@ -183,7 +185,7 @@ const updatedNotes = [
   setActionItems([])
 
   localStorage.setItem(
-    "peblo-notes",
+    "NeuroNotes",
     JSON.stringify(updatedNotes)
   )
 
@@ -197,7 +199,7 @@ const deleteNote = (id: string) => {
   setNotes(updatedNotes)
 
   localStorage.setItem(
-    "peblo-notes",
+    "NeuroNotes",
     JSON.stringify(updatedNotes)
   )
 
@@ -245,7 +247,7 @@ const updatedNotes = notes.map((note) =>    note.id === activeNoteId
   setNotes(updatedNotes)
 
   localStorage.setItem(
-    "peblo-notes",
+    "NeuroNotes",
     JSON.stringify(updatedNotes)
   )
 }
@@ -259,7 +261,7 @@ const updatedNotes = notes.map((note) =>    note.id === activeNoteId
     }, 1500)
 
     return () => clearTimeout(timer)
-  }, [title, content])
+  }, [title, content,summary, actionItems])
   useEffect(() => {
   const savedNote = localStorage.getItem("peblo-note")
 
@@ -282,6 +284,8 @@ if (savedNotes) {
     setActiveNoteId(firstNote.id)
     setTitle(firstNote.title)
     setContent(firstNote.content)
+    setSummary(firstNote.summary || "")
+setActionItems(firstNote.actionItems || [])
   }
 }
 }, [])
